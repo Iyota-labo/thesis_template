@@ -1,0 +1,22 @@
+sample1:
+  type: article
+  title: Article Sample Title
+  author:
+    - John
+  date: 2014
+  page-range: 1-3
+  parent:
+    type: periodical
+    title: ○○学会誌
+    volume: 1
+    issue: 1
+
+sample2:
+  type: thesis
+  title: Thesis Sample Title
+  author:
+    - ××
+    - ○○
+  date: 2021
+  publisher: ○○大学大学院
+  genre: 修士学位論文

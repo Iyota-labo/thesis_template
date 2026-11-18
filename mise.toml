@@ -1,0 +1,11 @@
+[tools]
+typst = "latest"
+
+[env]
+TYPST_FONT_PATHS = { default = "{{config_root}}/fonts" }
+
+[tasks.build_abstract]
+run = [
+    "mkdir -p dist",
+    "typst compile abstract.typ dist/abstract.pdf",
+]

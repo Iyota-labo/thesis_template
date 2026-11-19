@@ -1,11 +1,27 @@
 [tools]
+tinymist = "latest"
 typst = "latest"
 
 [env]
 TYPST_FONT_PATHS = { default = "{{config_root}}/fonts" }
 
-[tasks.build_abstract]
+[tasks.build]
+usage = '''
+arg "<template>" help="target template name without extension." {
+    choices "abstract" "thesis"
+}
+'''
 run = [
     "mkdir -p dist",
-    "typst compile abstract.typ dist/abstract.pdf",
+    "typst compile ${usage_template}.typ dist/${usage_template}.pdf",
+]
+
+[tasks.preview]
+usage = '''
+arg "<template>" help="target template name without extension." {
+    choices "abstract" "thesis"
+}
+'''
+run = [
+    "tinymist preview ${usage_template}.typ --open --invert-colors false"
 ]

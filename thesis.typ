@@ -1,80 +1,50 @@
-#let report_title = [
+#import "common.typ": conf, cover
+
+#let thesis_title = [
   タイトル１行目 \
   タイトル２行目
 ] // タイトル
-#let student_num = "--58---" // 学籍番号
+#let student_num = "xx58xxx" // 学籍番号
 #let student_name = "○○ ○○" // 名前
 #let teacher_name = "○○ ○○" // 担当教員名
 
 #set document(
-  title: report_title
+  title: thesis_title
 )
 
-// 全体ページ設定
-#set page(
-  paper: "a4",
-  margin: (top: 20mm, bottom: 25mm, left: 20mm, right: 20mm),
-)
-
-// 本文テキスト設定
-#set text(
-  lang: "ja",
-  font: ("Libertinus Serif", "BIZ UDMincho"),
-  size: 10.5pt,
-)
-
-// ヘッダー設定
-#set heading(numbering: "1.1")
-#show heading: set text(
-  font: ("Libertinus Serif", "BIZ UDGothic"),
-  size: 12pt,
-)
-
-// タイトル設定
-#show title: set text(size: 14pt)
-#show title: set align(center)
-
-// 図表の設定
-#show figure.caption: set text(size: 9pt)
-#show figure.where(
-  kind: table
-): set figure.caption(position: top)
-
-// 式番号
-#set math.equation(numbering: "(1)")
+// 共通設定
+#show: conf
 
 // 表紙
-
-#title[
-  #report_title
-]
-
-#let kinto(width, body) = {
-  // 文字列を1文字ずつの配列にして 1fr で結合する
-  let chars = body.clusters()
-  box(width: width, chars.join(h(1fr)))
-}
-
-
-#align(
-  bottom + right,
-  grid(
-    columns: (auto, auto, auto),
-    column-gutter: 0.8em, // 「：」の前後の余白
-    row-gutter: 0.8em,    // 行間
-  
-    kinto(5em, "指導教員名"), [：], kinto(6em, teacher_name),
-    kinto(5em, "学籍番号"), [：], kinto(6em, student_num),
-    kinto(5em, "氏名"),     [：], kinto(6em, student_name),
-  )
+#show: cover.with(
+  thesis_title: thesis_title,
+  teacher_name: teacher_name,
+  student_num: student_num,
+  student_name: student_name,
 )
 
+// 目次ページ
+#show outline.entry.where(
+  level: 1
+): set block(above: 1.2em)
+#outline()
 #pagebreak()
-#set page(columns: 2)
+
+// 本文
 
 = 序論
 
-参考文献１@sample1
+日本国民は、正当に選挙された国会における代表者を通じて行動し、われらとわれらの子孫のために、
+諸国民との協和による成果と、わが国全土にわたつて自由のもたらす恵沢を確保し、
+政府の行為によつて再び戦争の惨禍が起ることのないやうにすることを決意し、
+ここに主権が国民に存することを宣言し、この憲法を確定する。
+
+そもそも国政は、国民の厳粛な信託によるものであつて、その権威は国民に由来し、
+その権力は国民の代表者がこれを行使し、その福利は国民がこれを享受する。
+これは人類普遍の原理であり、この憲法は、かかる原理に基くものである。
+われらは、これに反する一切の憲法、法令及び詔勅を排除する。
+日本国民は、恒久の平和を念願し、人間相互の関係を支配する崇高な理想を深く自覚するのであつて、
+平和を愛する諸国民の公正と信義に信頼して、われらの安全と生存を保持しようと決意した。@sample1
 
 #figure(
   table(
